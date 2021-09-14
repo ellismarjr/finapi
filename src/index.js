@@ -21,12 +21,6 @@ function verifyIfExistsAccountByCPF(request, response, next) {
   return next();
 }
 
-/**
- * cpf - string
- * name - string
- * id - uuid
- * statement - []
- */
 app.post("/accounts", (request, response) => {
   const { cpf, name } = request.body;
 
