@@ -30,8 +30,6 @@ app.post("/accounts", (request, response) => {
   return response.status(201).send();
 });
 
-app.use(express.json());
-
 app.listen(3333, () => {
   console.log('Server started on port 3333, 🚀');
 });
