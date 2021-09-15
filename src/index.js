@@ -108,6 +108,21 @@ app.get("/statement/date", verifyIfExistsAccountByCPF, (request, response) => {
   return response.status(200).json(statements);
 });
 
+app.put("/account", verifyIfExistsAccountByCPF, (request, response) => {
+  const { name } = request.body;
+  const { customer } = request;
+
+  customer.name = name;
+
+  return response.status(201).send();
+});
+
+app.get("/account", verifyIfExistsAccountByCPF, (request, response) => {
+  const { customer } = request;
+
+  return response.status(200).json(customer);
+});
+
 app.listen(3333, () => {
   console.log('Server started on port 3333, 🚀');
 });
