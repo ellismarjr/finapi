@@ -1,5 +1,5 @@
 const express = require('express');
-const { v4: uuidv4} = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 
 const app = express();
 app.use(express.json());
@@ -42,6 +42,23 @@ app.post("/accounts", (request, response) => {
 app.get("/statement", verifyIfExistsAccountByCPF, (request, response) => {
   const { customer } = request;
   return response.json(customer.statement);
+});
+
+app.post("/deposit", verifyIfExistsAccountByCPF, (request, response) => {
+  const { description, amount } = request.body;
+
+  const { customer } = request;
+
+  const statementOperation = {
+    description,
+    amount,
+    created_at: new Date(),
+    type: 'credit'
+  };
+
+  customer.statement.push(statementOperation);
+
+  return response.status(201).send();
 });
 
 app.listen(3333, () => {
