@@ -123,6 +123,14 @@ app.get("/account", verifyIfExistsAccountByCPF, (request, response) => {
   return response.status(200).json(customer);
 });
 
+app.delete("/account", verifyIfExistsAccountByCPF, (request, response) => {
+  const {customer} = request;
+
+  customers.splice(customer, 1);
+
+  return response.status(200).json(customers);
+});
+
 app.listen(3333, () => {
   console.log('Server started on port 3333, 🚀');
 });
